@@ -1,7 +1,8 @@
 // ==UserScript==
-// @name  Download TikTok Video
-// @match https://www.tiktok.com/*
-// @grant GM_download
+// @name    Download TikTok Video
+// @version 1.0.0
+// @match   https://www.tiktok.com/*
+// @grant   GM_download
 // ==/UserScript==
 
 document.onkeydown = (e) => {

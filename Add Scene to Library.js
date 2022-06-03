@@ -1,26 +1,27 @@
 // ==UserScript==
-// @name          Add Scene to Library
-// @match         https://hdzog.com/videos/*
-// @match         https://privatehomeclips.com/videos/*
-// @match         https://pornwild.com/videos/*
-// @match         https://severeporn.com/videos/*
-// @match         https://spankbang.com/*/video/*
-// @match         https://txxx.com/videos/*
-// @match         https://upornia.com/videos/*
-// @match         https://www.fpo.xxx/videos/*
-// @match         https://www.peekvids.com/*
-// @match         https://www.playvids.com/*
-// @match         https://www.pornflip.com/*
-// @match         https://www.pornhits.com/video/*
-// @match         https://www.porntrex.com/video/*
-// @match         https://www.pornoeggs.com/*
-// @match         https://www.tnaflix.com/*
-// @match         https://www.yourpornflare.com/video/*
-// @exclude-match https://www.peekvids.com/embed?v=*
-// @exclude-match https://www.playvids.com/embed/*
-// @exclude-match https://www.pornflip.com/embed/*
-// @exclude-match https://www.pornoeggs.com/embed?v=*
-// @grant         GM_download
+// @name    Add Scene to Library
+// @version 1.0.0
+// @match   https://hdzog.com/videos/*
+// @match   https://privatehomeclips.com/videos/*
+// @match   https://pornwild.com/videos/*
+// @match   https://severeporn.com/videos/*
+// @match   https://spankbang.com/*/video/*
+// @match   https://txxx.com/videos/*
+// @match   https://upornia.com/videos/*
+// @match   https://www.fpo.xxx/videos/*
+// @match   https://www.peekvids.com/*
+// @match   https://www.playvids.com/*
+// @match   https://www.pornflip.com/*
+// @match   https://www.pornhits.com/video/*
+// @match   https://www.porntrex.com/video/*
+// @match   https://www.pornoeggs.com/*
+// @match   https://www.tnaflix.com/*
+// @match   https://www.yourpornflare.com/video/*
+// @exclude https://www.peekvids.com/embed?v=*
+// @exclude https://www.playvids.com/embed/*
+// @exclude https://www.pornflip.com/embed/*
+// @exclude https://www.pornoeggs.com/embed?v=*
+// @grant   GM_download
 // ==/UserScript==
 
 const sites = {
