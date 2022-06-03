@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Generate Google Search
-// @version 1.0.0
+// @version 1.0.1
 // @match   https://bangbros.com/*
 // @match   https://dickdrainers.com/*
 // @match   https://manuelferrara.com/*
@@ -276,7 +276,7 @@ document.onkeydown = (e) => {
           .forEach((scene) => {
             const el = scene.parentElement.nextElementSibling;
 
-            const site = sites[name];
+            const site = sites[name].name;
             const title = el
               .querySelector(".SceneThumb-SceneInfo-SceneTitle-Link")
               .innerText.trim();
