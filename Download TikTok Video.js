@@ -1,6 +1,7 @@
 // ==UserScript==
-// @name          Download TikTok Video
-// @match         https://www.tiktok.com/*
+// @name  Download TikTok Video
+// @match https://www.tiktok.com/*
+// @grant GM_xmlhttpRequest
 // ==/UserScript==
 
 document.onkeydown = (e) => {
