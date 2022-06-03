@@ -43,26 +43,22 @@
 // @match https://xxxbunker.com/embed/*
 // ==/UserScript==
 
-const input = document.createElement("input");
-input.type = "file";
+window.addEventListener("dragover", (e) => {
+  e.stopPropagation();
+  e.preventDefault();
+});
 
-input.onchange = (e) => {
+window.addEventListener("drop", (e) => {
+  e.stopPropagation();
+  e.preventDefault();
+
   const reader = new FileReader();
   reader.onload = (e) => {
     addChapters(e.target.result);
   };
 
-  reader.readAsText(e.target.files[0]);
-};
-
-const btn = document.createElement("button");
-btn.innerText = "Add Chapters";
-btn.style.position = "absolute";
-btn.style.zIndex = 1000;
-
-btn.onclick = () => {
-  input.click();
-};
+  reader.readAsText(e.dataTransfer.files[0]);
+});
 
 const addChapters = (str) => {
   const times = str
@@ -99,8 +95,6 @@ const addChapters = (str) => {
     }
   };
 };
-
-document.querySelector("body").prepend(btn);
 
 document.onkeydown = (e) => {
   const video = document.querySelector("video");

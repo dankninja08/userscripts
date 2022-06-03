@@ -21,11 +21,6 @@ document.onkeydown = (e) => {
   }
 };
 
-window.addEventListener("dragenter", (e) => {
-  e.stopPropagation();
-  e.preventDefault();
-});
-
 window.addEventListener("dragover", (e) => {
   e.stopPropagation();
   e.preventDefault();
