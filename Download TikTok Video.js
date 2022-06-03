@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name  Download TikTok Video
 // @match https://www.tiktok.com/*
-// @grant GM_xmlhttpRequest
+// @grant GM_download
 // ==/UserScript==
 
 document.onkeydown = (e) => {
@@ -16,17 +16,7 @@ document.onkeydown = (e) => {
       const videoUrl = document.querySelector('div[data-e2e="browse-video"]')
         .children[0].src;
 
-      fetch(videoUrl)
-        .then((res) => res.blob())
-        .then((res) => {
-          const objectUrl = URL.createObjectURL(res);
-
-          const link = document.createElement("a");
-          link.href = objectUrl;
-          link.download = `${slut} | ${id} (${trend}).mp4`;
-
-          link.click();
-        });
+      GM_download(videoUrl, `${slut} | ${id} (${trend}).mp4`);
     }
   }
 };
