@@ -1,17 +1,12 @@
 // ==UserScript==
 // @name          Add Scene to Library
-// @match         https://goodporn.to/videos/*
 // @match         https://hdzog.com/videos/*
-// @match         https://momzr.com/videos/*
 // @match         https://privatehomeclips.com/videos/*
 // @match         https://pornwild.com/videos/*
 // @match         https://severeporn.com/videos/*
 // @match         https://spankbang.com/*/video/*
-// @match         https://theporngod.com/videos/*
 // @match         https://txxx.com/videos/*
 // @match         https://upornia.com/videos/*
-// @match         https://www.anon-v.net/videos/*
-// @match         https://www.eachporn.com/video/*
 // @match         https://www.fpo.xxx/videos/*
 // @match         https://www.peekvids.com/*
 // @match         https://www.playvids.com/*
@@ -20,41 +15,21 @@
 // @match         https://www.porntrex.com/video/*
 // @match         https://www.pornoeggs.com/*
 // @match         https://www.tnaflix.com/*
-// @match         https://www.xfreehd.com/video/*
 // @match         https://www.yourpornflare.com/video/*
 // @exclude-match https://www.peekvids.com/embed?v=*
 // @exclude-match https://www.playvids.com/embed/*
 // @exclude-match https://www.pornflip.com/embed/*
 // @exclude-match https://www.pornoeggs.com/embed?v=*
+// @grant         GM_download
 // ==/UserScript==
 
 const sites = {
-  "anon-v": {
-    template: "https://www.anon-v.net/embed/#",
-    indexOfId: 2,
-  },
-  eachporn: {
-    template: "https://www.eachporn.com/embed/#",
-    indexOfId: 2,
-  },
-  filtercams: {
-    template: "https://filtercams.com/embed/#",
-    indexOfId: 2,
-  },
   fpo: {
     template: "https://www.fpo.xxx/embed/#",
     indexOfId: 2,
   },
-  goodporn: {
-    template: "https://goodporn.to/embed/#",
-    indexOfId: 2,
-  },
   hdzog: {
     template: "https://hdzog.com/embed/#",
-    indexOfId: 2,
-  },
-  momzr: {
-    template: "https://momzr.com/embed/#",
     indexOfId: 2,
   },
   pornhits: {
@@ -85,20 +60,12 @@ const sites = {
     template: "https://spankbang.com/embed/#",
     indexOfId: 1,
   },
-  theporngod: {
-    template: "https://theporngod.com/embed/#",
-    indexOfId: 2,
-  },
   txxx: {
     template: "https://txxx.com/embed/#",
     indexOfId: 2,
   },
   upornia: {
     template: "https://upornia.com/embed/#",
-    indexOfId: 2,
-  },
-  xfreehd: {
-    template: "https://www.xfreehd.com/embed/#",
     indexOfId: 2,
   },
 };
@@ -135,10 +102,6 @@ document.onkeydown = (e) => {
 </plist>`;
 
     const downloadUrl = URL.createObjectURL(new Blob([file]));
-    const link = document.createElement("a");
-    link.href = downloadUrl;
-    link.download = `${sitename}.webloc`;
-
-    link.click();
+    GM_download(downloadUrl, `${sitename}.webloc`);
   }
 };
