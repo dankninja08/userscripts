@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Add Scene to Library
-// @version 1.0.0
+// @version 2
 // @match   https://hdzog.com/videos/*
 // @match   https://privatehomeclips.com/videos/*
 // @match   https://pornwild.com/videos/*

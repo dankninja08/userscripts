@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Add Chapters to Scene
-// @version 1.0.0
+// @version 2
 // @match   https://embed.redtube.com/?id=*
 // @match   https://hclips.com/embed/*
 // @match   https://hdzog.com/embed/*

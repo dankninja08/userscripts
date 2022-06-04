@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Download TikTok Video
-// @version 1.0.0
+// @version 2
 // @match   https://www.tiktok.com/*
 // @grant   GM_download
 // ==/UserScript==
@@ -18,6 +18,33 @@ document.onkeydown = (e) => {
         .children[0].src;
 
       GM_download(videoUrl, `${slut} | ${id} (${trend}).mp4`);
+    } else {
+      const sorted = [
+        ...document.querySelector('div[data-e2e="user-post-item-list"]')
+          .children,
+      ].sort((a, b) => {
+        const countStrA = a.querySelector("strong").innerText;
+        const countStrB = b.querySelector("strong").innerText;
+
+        const countA = countStrA.endsWith("K")
+          ? parseFloat(countStrA) * 1000
+          : countStrA.endsWith("M")
+          ? parseFloat(countStrA) * 1000000
+          : parseInt(countStrA);
+        const countB = countStrB.endsWith("K")
+          ? parseFloat(countStrB) * 1000
+          : countStrB.endsWith("M")
+          ? parseFloat(countStrB) * 1000000
+          : parseInt(countStrB);
+
+        if (countA < countB) return 1;
+        else if (countA > countB) return -1;
+        else return 0;
+      });
+
+      document
+        .querySelector('div[data-e2e="user-post-item-list"]')
+        .replaceChildren(...sorted);
     }
   }
 };

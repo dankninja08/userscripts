@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Generate Google Search
-// @version 1.0.1
+// @version 2
 // @match   https://bangbros.com/*
 // @match   https://dickdrainers.com/*
 // @match   https://manuelferrara.com/*
