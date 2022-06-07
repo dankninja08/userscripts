@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Generate Google Search
-// @version 4
+// @version 5
 // @match   https://www.adulttime.com/*
 // @match   https://bangbros.com/*
 // @match   https://www.blowpass.com/*
@@ -315,7 +315,7 @@ const sites = {
     name: "Throated",
   },
   tiny4k: {
-    name: "Tink 4K",
+    name: "Tiny 4K",
     scraper: "Porn Pros",
   },
   tinysis: {
