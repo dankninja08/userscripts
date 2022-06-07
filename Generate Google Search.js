@@ -1,56 +1,76 @@
 // ==UserScript==
 // @name    Generate Google Search
-// @version 2
+// @version 3
+// @match   https://www.adulttime.com/*
 // @match   https://bangbros.com/*
+// @match   https://www.blowpass.com/*
 // @match   https://dickdrainers.com/*
 // @match   https://manuelferrara.com/*
+//
+// @match   https://www.brazzers.com/*
+// @match   https://www.fakehub.com/*
+// @match   https://www.mofos.com/*
+// @match   https://www.realitykings.com/*
+//
 // @match   https://nubilefilms.com/*
 // @match   https://nubiles-porn.com/*
+//
+// @match   https://www.mylf.com/*
+// @match   https://www.teamskeet.com/*
+//
+// @match   https://www.blacked.com/*
+// @match   https://www.blackedraw.com/*
+// @match   https://www.deeper.com/*
+// @match   https://www.tushy.com/*
+// @match   https://www.tushyraw.com/*
+// @match   https://www.vixen.com/*
+//
 // @match   https://tour.allanal.com/*
 // @match   https://tour.analonly.com/*
 // @match   https://tour.nympho.com/*
 // @match   https://tour.swallowed.com/*
 // @match   https://tour.trueanal.com/*
-// @match   https://www.adulttime.com/*
+//
 // @match   https://www.analmom.com/*
 // @match   https://www.badmilfs.com/*
 // @match   https://www.bbcparadise.com/*
 // @match   https://www.bffs.com/*
-// @match   https://www.blacked.com/*
-// @match   https://www.blackedraw.com/*
-// @match   https://www.blowpass.com/*
-// @match   https://www.brazzers.com/*
 // @match   https://www.dadcrush.com/*
 // @match   https://www.daughterswap.com/*
-// @match   https://www.deeper.com/*
-// @match   https://www.fakehub.com/*
 // @match   https://www.familystrokes.com/*
 // @match   https://www.fostertapes.com/*
 // @match   https://www.freeusefantasy.com/*
 // @match   https://www.freeusemilf.com/*
 // @match   https://www.hijabhookup.com/*
 // @match   https://www.littleasians.com/*
-// @match   https://www.mofos.com/*
 // @match   https://www.momswap.com/*
-// @match   https://www.mylf.com/*
 // @match   https://www.mylfdom.com/*
 // @match   https://www.notmygrandpa.com/*
 // @match   https://www.pervdoctor.com/*
 // @match   https://www.pervmom.com/*
 // @match   https://www.pervnana.com/*
 // @match   https://www.pervtherapy.com/*
-// @match   https://www.realitykings.com/*
 // @match   https://www.shoplyfter.com/*
 // @match   https://www.shoplyftermylf.com/*
 // @match   https://www.sislovesme.com/*
 // @match   https://www.sisswap.com/*
-// @match   https://www.teamskeet.com/*
 // @match   https://www.teensloveblackcocks.com/*
 // @match   https://www.thickumz.com/*
 // @match   https://www.tinysis.com/*
-// @match   https://www.tushy.com/*
-// @match   https://www.tushyraw.com/*
-// @match   https://www.vixen.com/*
+//
+// @match   https://bbcpie.com/*
+// @match   https://cum4k.com/*
+// @match   https://facials4k.com/*
+// @match   https://girlcum.com/*
+// @match   https://holed.com/*
+// @match   https://mom4k.com/*
+// @match   https://nannyspy.com/*
+// @match   https://passion-hd.com/*
+// @match   https://pornpros.com/*
+// @match   https://povd.com/*
+// @match   https://puremature.com/*
+// @match   https://spyfam.com/*
+// @match   https://tiny4k.com/*
 // ==/UserScript==
 
 const sites = {
@@ -84,6 +104,10 @@ const sites = {
     name: "BBC Paradise",
     scraper: "Sis Loves Me",
   },
+  bbcpie: {
+    name: "BBC Pie",
+    scraper: "Porn Pros",
+  },
   bffs: {
     name: "BFFs",
     scraper: "Sis Loves Me",
@@ -103,6 +127,10 @@ const sites = {
     name: "Brazzers",
     scraper: "Brazzers",
   },
+  cum4k: {
+    name: "Cum 4K",
+    scraper: "Porn Pros",
+  },
   dadcrush: {
     name: "Dad Crush",
     scraper: "Sis Loves Me",
@@ -118,6 +146,10 @@ const sites = {
   dickdrainers: {
     name: "Dick Drainers",
     scraper: "Dick Drainers",
+  },
+  facials4k: {
+    name: "Facials 4K",
+    scraper: "Porn Pros",
   },
   fakehub: {
     scraper: "Brazzers",
@@ -138,9 +170,17 @@ const sites = {
     name: "Freeuse MILF",
     scraper: "Sis Loves Me",
   },
+  girlcum: {
+    name: "Girl Cum",
+    scraper: "Porn Pros",
+  },
   hijabhookup: {
     name: "Hijab Hookup",
     scraper: "Sis Loves Me",
+  },
+  holed: {
+    name: "Holed",
+    scraper: "Porn Pros",
   },
   littleasians: {
     name: "Little Asians",
@@ -152,6 +192,10 @@ const sites = {
   },
   mofos: {
     scraper: "Brazzers",
+  },
+  mom4k: {
+    name: "Mom 4K",
+    scraper: "Porn Pros",
   },
   mommyblowsbest: {
     name: "Mommy Blows Best",
@@ -166,6 +210,14 @@ const sites = {
   mylfdom: {
     name: "Mylf Dom",
     scraper: "Sis Loves Me",
+  },
+  myveryfirsttime: {
+    name: "My Very First Time",
+    scraper: "Porn Pros",
+  },
+  nannyspy: {
+    name: "Nanny Spy",
+    scraper: "Porn Pros",
   },
   notmygrandpa: {
     name: "Not My Grandpa",
@@ -184,6 +236,10 @@ const sites = {
   onlyteenblowjobs: {
     name: "Only Teen Blowjobs",
   },
+  "passion-hd": {
+    name: "Passion HD",
+    scraper: "Porn Pros",
+  },
   pervdoctor: {
     name: "Perv Doctor",
     scraper: "Sis Loves Me",
@@ -199,6 +255,18 @@ const sites = {
   pervtherapy: {
     name: "Perv Therapy",
     scraper: "Sis Loves Me",
+  },
+  pornpros: {
+    name: "Porn Pros",
+    scraper: "Porn Pros",
+  },
+  povd: {
+    name: "POVD",
+    scraper: "Porn Pros",
+  },
+  puremature: {
+    name: "Pure Mature",
+    scraper: "Porn Pros",
   },
   realitykings: {
     name: "Reality Kings",
@@ -224,6 +292,10 @@ const sites = {
     name: "Spank Monster",
     scraper: "Spank Monster",
   },
+  spyfam: {
+    name: "Spy Fam",
+    scraper: "Porn Pros",
+  },
   swallowed: {
     name: "Swallowed",
     scraper: "Swallowed",
@@ -241,6 +313,10 @@ const sites = {
   },
   throated: {
     name: "Throated",
+  },
+  tiny4k: {
+    name: "Tink 4K",
+    scraper: "Porn Pros",
   },
   tinysis: {
     name: "Tiny Sis",
@@ -268,15 +344,16 @@ document.onkeydown = (e) => {
   if (e.key === "/") {
     const components = location.hostname.split(".");
     const name = components[components.length - 2];
+    const site = sites[name];
 
-    switch (sites[name].scraper) {
+    switch (site.scraper) {
       case "Adult Time":
         [...document.querySelectorAll(".SceneThumb-Default img")]
           .map((el) => el.parentElement)
           .forEach((scene) => {
             const el = scene.parentElement.nextElementSibling;
 
-            const site = sites[name].name;
+            const site = site.name;
             const title = el
               .querySelector(".SceneThumb-SceneInfo-SceneTitle-Link")
               .innerText.trim();
@@ -306,7 +383,7 @@ document.onkeydown = (e) => {
         ].forEach((scene) => {
           const el = scene.parentElement.nextElementSibling;
 
-          const site = sites[name].name;
+          const site = site.name;
           const title = el
             .querySelector('a[data-test-component="TitleLink"]')
             ?.innerText.trim();
@@ -351,7 +428,7 @@ document.onkeydown = (e) => {
 
             const site =
               el.querySelector('a[href^="/scenes?site="]')?.children[1]
-                .innerText || sites[name].name;
+                .innerText || site.name;
             const title = el
               .querySelector('a[href^="/video/"], a[href^="/scene/"]')
               .innerText.trim();
@@ -370,7 +447,7 @@ document.onkeydown = (e) => {
           (scene) => {
             const el = scene.parentElement.parentElement;
 
-            const site = sites[name].name;
+            const site = site.name;
             const title = location.href.includes("/movies/")
               ? el.parentElement
                   .querySelector("h3 a")
@@ -402,7 +479,7 @@ document.onkeydown = (e) => {
           .forEach((scene) => {
             const el = scene.parentElement;
 
-            const site = sites[name].name;
+            const site = sites.name;
             const title = el.children[2].innerText.trim();
             const girls = [...el.querySelectorAll(".update_models a")]
               .map((el) => el.innerText.trim())
@@ -436,12 +513,24 @@ document.onkeydown = (e) => {
 
             scene.href = `https://www.google.com/search?q=${site} - ${girls} - ${title}`;
           });
+      case "Porn Pros":
+        [...document.querySelectorAll(".card > a")].forEach((scene) => {
+          const el = scene.nextElementSibling;
+
+          const site = site.name;
+          const title = el.querySelector(".card-title").innerText.trim();
+          const girls = [...el.querySelectorAll(".actors a")]
+            .map((el) => el.innerText.trim())
+            .join(", ");
+
+          scene.href = `https://www.google.com/search?q=${site} - ${girls} - ${title}`;
+        });
       case "Sis Loves Me":
         [...document.querySelectorAll(".videoimg_wrapper a")].forEach(
           (scene) => {
             const el = scene.parentElement.parentElement.nextElementSibling;
 
-            const site = sites[location.hostname.split(".")[1]].name;
+            const site = site.name;
             const title = el.querySelector(".title a").innerText.trim();
             const girls = [...el.querySelectorAll(".model-name-link")]
               .map((el) => el.innerText.trim())
@@ -457,7 +546,7 @@ document.onkeydown = (e) => {
               scene.parentElement.parentElement.parentElement
                 .nextElementSibling;
 
-            const site = sites[name].name;
+            const site = site.name;
             const title = el
               .querySelector(".title a, .content-title-wrap a")
               .innerText.trim()
