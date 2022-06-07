@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Generate Google Search
-// @version 3
+// @version 4
 // @match   https://www.adulttime.com/*
 // @match   https://bangbros.com/*
 // @match   https://www.blowpass.com/*
@@ -344,16 +344,15 @@ document.onkeydown = (e) => {
   if (e.key === "/") {
     const components = location.hostname.split(".");
     const name = components[components.length - 2];
-    const site = sites[name];
 
-    switch (site.scraper) {
+    switch (sites[name].scraper) {
       case "Adult Time":
         [...document.querySelectorAll(".SceneThumb-Default img")]
           .map((el) => el.parentElement)
           .forEach((scene) => {
             const el = scene.parentElement.nextElementSibling;
 
-            const site = site.name;
+            const site = sites[name].name;
             const title = el
               .querySelector(".SceneThumb-SceneInfo-SceneTitle-Link")
               .innerText.trim();
@@ -383,7 +382,7 @@ document.onkeydown = (e) => {
         ].forEach((scene) => {
           const el = scene.parentElement.nextElementSibling;
 
-          const site = site.name;
+          const site = sites[name].name;
           const title = el
             .querySelector('a[data-test-component="TitleLink"]')
             ?.innerText.trim();
@@ -428,7 +427,7 @@ document.onkeydown = (e) => {
 
             const site =
               el.querySelector('a[href^="/scenes?site="]')?.children[1]
-                .innerText || site.name;
+                .innerText || sites[name].name;
             const title = el
               .querySelector('a[href^="/video/"], a[href^="/scene/"]')
               .innerText.trim();
@@ -447,7 +446,7 @@ document.onkeydown = (e) => {
           (scene) => {
             const el = scene.parentElement.parentElement;
 
-            const site = site.name;
+            const site = sites[name].name;
             const title = location.href.includes("/movies/")
               ? el.parentElement
                   .querySelector("h3 a")
@@ -479,7 +478,7 @@ document.onkeydown = (e) => {
           .forEach((scene) => {
             const el = scene.parentElement;
 
-            const site = sites.name;
+            const site = sites[name].name;
             const title = el.children[2].innerText.trim();
             const girls = [...el.querySelectorAll(".update_models a")]
               .map((el) => el.innerText.trim())
@@ -517,7 +516,7 @@ document.onkeydown = (e) => {
         [...document.querySelectorAll(".card > a")].forEach((scene) => {
           const el = scene.nextElementSibling;
 
-          const site = site.name;
+          const site = sites[name].name;
           const title = el.querySelector(".card-title").innerText.trim();
           const girls = [...el.querySelectorAll(".actors a")]
             .map((el) => el.innerText.trim())
@@ -530,7 +529,7 @@ document.onkeydown = (e) => {
           (scene) => {
             const el = scene.parentElement.parentElement.nextElementSibling;
 
-            const site = site.name;
+            const site = sites[name].name;
             const title = el.querySelector(".title a").innerText.trim();
             const girls = [...el.querySelectorAll(".model-name-link")]
               .map((el) => el.innerText.trim())
@@ -546,7 +545,7 @@ document.onkeydown = (e) => {
               scene.parentElement.parentElement.parentElement
                 .nextElementSibling;
 
-            const site = site.name;
+            const site = sites[name].name;
             const title = el
               .querySelector(".title a, .content-title-wrap a")
               .innerText.trim()
