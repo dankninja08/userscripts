@@ -1,10 +1,9 @@
 // ==UserScript==
 // @name    Add Scene to Library
-// @version 2
+// @version 3
 // @match   https://hdzog.com/videos/*
 // @match   https://privatehomeclips.com/videos/*
 // @match   https://pornwild.com/videos/*
-// @match   https://severeporn.com/videos/*
 // @match   https://spankbang.com/*/video/*
 // @match   https://txxx.com/videos/*
 // @match   https://upornia.com/videos/*
@@ -17,6 +16,7 @@
 // @match   https://www.pornoeggs.com/*
 // @match   https://www.tnaflix.com/*
 // @match   https://www.yourpornflare.com/video/*
+// @match   https://xhamster.com/videos/*
 // @exclude https://www.peekvids.com/embed?v=*
 // @exclude https://www.playvids.com/embed/*
 // @exclude https://www.pornflip.com/embed/*
@@ -37,10 +37,6 @@ const sites = {
     template: "https://pornhits.com/embed.php?id=#",
     indexOfId: 2,
   },
-  pornoeggs: {
-    template: "https://www.pornoeggs.com/embed?v=#",
-    indexOfId: 1,
-  },
   porntrex: {
     template: "https://www.porntrex.com/embed/#",
     indexOfId: 2,
@@ -51,10 +47,6 @@ const sites = {
   },
   privatehomeclips: {
     template: "https://hclips.com/embed/#",
-    indexOfId: 2,
-  },
-  severeporn: {
-    template: "https://severeporn.com/embed/#",
     indexOfId: 2,
   },
   spankbang: {
@@ -81,16 +73,22 @@ document.onkeydown = (e) => {
     if (site) {
       const id = location.pathname.split("/")[site.indexOfId];
       url = site.template.replace("#", id);
-    } else {
-      if (
-        ["peekvids", "playvids", "pornflip", "yourpornflare"].includes(sitename)
-      ) {
-        url = document
-          .querySelector("textarea")
-          .innerText.match(`https://www.${sitename}.com/embed?.*?(?=')`)[0];
-      } else if (sitename === "tnaflix") {
-        url = document.querySelector('meta[itemprop="embedUrl"]').content;
-      }
+    } else if (
+      [
+        "peekvids",
+        "playvids",
+        "pornflip",
+        "pornoeggs",
+        "yourpornflare",
+      ].includes(sitename)
+    ) {
+      url = document
+        .querySelector("textarea")
+        .innerText.match(`https://www.${sitename}.com/embed?.*?(?=')`)[0];
+    } else if (sitename === "tnaflix") {
+      url = document.querySelector('meta[itemprop="embedUrl"]').content;
+    } else if (sitename === "xhamster") {
+      url = `https://xhamster.com/embed/${location.pathname.split("-").pop()}`;
     }
 
     const file = `<?xml version="1.0" encoding="UTF-8"?>
