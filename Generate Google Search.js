@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name    Generate Google Search
-// @version 5
+// @version 6
 // @match   https://www.adulttime.com/*
 // @match   https://bangbros.com/*
 // @match   https://www.blowpass.com/*
 // @match   https://dickdrainers.com/*
 // @match   https://manuelferrara.com/*
+// @match   https://www.naughtyamerica.com/*
 //
 // @match   https://www.brazzers.com/*
 // @match   https://www.fakehub.com/*
@@ -218,6 +219,9 @@ const sites = {
   nannyspy: {
     name: "Nanny Spy",
     scraper: "Porn Pros",
+  },
+  naughtyamerica: {
+    scraper: "Naughty America",
   },
   notmygrandpa: {
     name: "Not My Grandpa",
@@ -487,6 +491,19 @@ document.onkeydown = (e) => {
 
             scene.href = `https://www.google.com/search?q=${site} - ${girls} - ${title}`;
           });
+      case "Naughty America":
+        [...document.querySelectorAll(".scene-item .contain-img")].forEach(
+          (scene) => {
+            const el = scene.parentElement;
+
+            const site = el.querySelector(".site-title").innerText.trim();
+            const girls = [...el.querySelectorAll(".contain-actors a")]
+              .map((el) => el.innerText.trim())
+              .join(", ");
+
+            scene.href = `https://www.google.com/search?q=${site} - ${girls}`;
+          }
+        );
       case "Nubiles-Porn":
         [...document.querySelectorAll(".img-wrapper")]
           .map(
