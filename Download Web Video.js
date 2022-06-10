@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Download Web Video
-// @version 4
+// @version 5
 // @match   https://crazyshit.com/*
 // @match   https://soundgasm.net/*
 // @match   https://thisvid.com/*
@@ -30,7 +30,7 @@ document.onkeydown = (e) => {
         url = document.querySelector("source").src;
         break;
     }
-  }
 
-  GM_download(url, filename);
+    GM_download(url, filename);
+  }
 };
