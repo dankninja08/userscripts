@@ -2,6 +2,7 @@
 // @name    Download Web Video
 // @version 2
 // @match   https://soundgasm.net/*
+// @match   https://thisvid.com/*
 // @grant   GM_download
 // ==/UserScript==
 
