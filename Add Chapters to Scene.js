@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Add Chapters to Scene
-// @version 4
+// @version 5
 // @match   https://www.fpo.xxx/embed/*
 // @match   https://hclips.com/embed/*
 // @match   https://hdzog.com/embed/*
@@ -60,22 +60,27 @@ const data = {
   ],
 };
 
-const name = decodeURIComponent(location.hash.substring(1));
+const timeToSeconds = (time) => {
+  const parts = time.split(":");
+  return (
+    parseInt(parts[0]) * 60 * 60 + parseInt(parts[1]) * 60 + parseInt(parts[2])
+  );
+};
 
-const times = data[name].map(({ start, end }) => ({
-  start: timeToSeconds(start),
-  end: timeToSeconds(end),
-}));
+const times = data[decodeURIComponent(location.hash.substring(1))].map(
+  ({ start, end }) => ({ start: timeToSeconds(start), end: timeToSeconds(end) })
+);
 
-document.querySelector("video").ontimeupdate = (e) => {
-  const currTime = e.target.currentTime;
+const video = document.querySelector("video");
 
+video.ontimeupdate = (e) => {
   const found = times.find(
-    (time) => currTime >= time.start && currTime <= time.end
+    (time) =>
+      e.target.currentTime >= time.start && e.target.currentTime <= time.end
   );
 
   if (!found) {
-    const nearest = times.find((time) => time.start > currTime);
+    const nearest = times.find((time) => time.start > e.target.currentTime);
 
     if (nearest) e.target.currentTime = nearest.start;
     else e.target.currentTime = times[0].start;
@@ -83,21 +88,18 @@ document.querySelector("video").ontimeupdate = (e) => {
 };
 
 document.onkeydown = (e) => {
-  const video = document.querySelector("video");
+  switch (e.key) {
+    case ",":
+      video.currentTime -= 3;
+      break;
 
-  if (e.key === ",") {
-    video.currentTime -= 3;
-  } else if (e.key === ".") {
-    video.currentTime += 3;
-  } else if (e.key === "p") {
-    if (video.paused) video.play();
-    else video.pause();
+    case ".":
+      video.currentTime += 3;
+      break;
+
+    case "p":
+      if (video.paused) video.play();
+      else video.pause();
+      break;
   }
-};
-
-const timeToSeconds = (time) => {
-  const parts = time.split(":");
-  return (
-    parseInt(parts[0]) * 60 * 60 + parseInt(parts[1]) * 60 + parseInt(parts[2])
-  );
 };
