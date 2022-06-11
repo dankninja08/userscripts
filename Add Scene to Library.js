@@ -1,22 +1,22 @@
 // ==UserScript==
 // @name    Add Scene to Library
-// @version 3
-// @match   https://hdzog.com/videos/*
-// @match   https://privatehomeclips.com/videos/*
-// @match   https://pornwild.com/videos/*
-// @match   https://spankbang.com/*/video/*
-// @match   https://txxx.com/videos/*
-// @match   https://upornia.com/videos/*
+// @version 4
 // @match   https://www.fpo.xxx/videos/*
+// @match   https://hdzog.com/videos/*
 // @match   https://www.peekvids.com/*
 // @match   https://www.playvids.com/*
 // @match   https://www.pornflip.com/*
 // @match   https://www.pornhits.com/video/*
-// @match   https://www.porntrex.com/video/*
 // @match   https://www.pornoeggs.com/*
+// @match   https://www.porntrex.com/video/*
+// @match   https://pornwild.com/videos/*
+// @match   https://privatehomeclips.com/videos/*
+// @match   https://spankbang.com/*/video/*
 // @match   https://www.tnaflix.com/*
-// @match   https://www.yourpornflare.com/video/*
+// @match   https://txxx.com/videos/*
+// @match   https://upornia.com/videos/*
 // @match   https://xhamster.com/videos/*
+// @match   https://www.yourpornflare.com/video/*
 // @exclude https://www.peekvids.com/embed?v=*
 // @exclude https://www.playvids.com/embed/*
 // @exclude https://www.pornflip.com/embed/*
@@ -63,7 +63,7 @@ const sites = {
   },
 };
 
-document.onkeydown = (e) => {
+document.onkeydown = async (e) => {
   if (e.key === "/") {
     const sitename = location.hostname.replace("www.", "").split(".")[0];
 
@@ -91,16 +91,18 @@ document.onkeydown = (e) => {
       url = `https://xhamster.com/embed/${location.pathname.split("-").pop()}`;
     }
 
+    const filename = await navigator.clipboard.readText();
+
     const file = `<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
   <key>URL</key>
-  <string>${url}</string>
+  <string>${url}#${encodeURIComponent(filename)}</string>
 </dict>
 </plist>`;
 
     const downloadUrl = URL.createObjectURL(new Blob([file]));
-    GM_download(downloadUrl, `${sitename}.webloc`);
+    GM_download(downloadUrl, `${filename}.webloc`);
   }
 };
