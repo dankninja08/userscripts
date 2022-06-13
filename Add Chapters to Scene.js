@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Add Chapters to Scene
-// @version 6
+// @version 7
 // @match   https://www.fpo.xxx/embed/*
 // @match   https://hclips.com/embed/*
 // @match   https://hdzog.com/embed/*
@@ -20,15 +20,12 @@
 // @grant   GM_download
 // ==/UserScript==
 
-const extractTimestamps = () =>
-  decodeURIComponent(location.hash.substring(1))
+document.onkeydown = (e) => {
+  let times = decodeURIComponent(location.hash.substring(1))
     .split(",")
     .filter((time) => !!time)
     .map((time) => parseInt(time));
 
-let times = extractTimestamps();
-
-document.onkeydown = (e) => {
   const video = document.querySelector("video");
 
   switch (e.key) {
@@ -69,11 +66,11 @@ document.onkeydown = (e) => {
 
     case "/":
       const time = Math.round(video.currentTime);
-      if (!times.includes(time)) {
-        times.push(time);
-        times.sort((a, b) => a - b);
-        location.hash = times.join(",");
-      }
+
+      if (times.includes(time)) times = times.filter((t) => t !== time);
+      else times = [...times, time].sort((a, b) => a - b);
+
+      location.hash = times.join(",");
       break;
 
     case "s":
