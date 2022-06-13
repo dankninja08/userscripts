@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Add Scene to Library
-// @version 5
+// @version 6
 // @match   https://www.fpo.xxx/videos/*
 // @match   https://hdzog.com/videos/*
 // @match   https://www.peekvids.com/*
@@ -100,6 +100,6 @@ document.onkeydown = (e) => {
 </dict>
 </plist>`;
 
-    GM_download(URL.createObjectURL(new Blob([file])), `${filename}.webloc`);
+    GM_download(URL.createObjectURL(new Blob([file])), `${site}.webloc`);
   }
 };
