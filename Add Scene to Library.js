@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Add Scene to Library
-// @version 4
+// @version 5
 // @match   https://www.fpo.xxx/videos/*
 // @match   https://hdzog.com/videos/*
 // @match   https://www.peekvids.com/*
@@ -63,7 +63,7 @@ const sites = {
   },
 };
 
-document.onkeydown = async (e) => {
+document.onkeydown = (e) => {
   if (e.key === "/") {
     const sitename = location.hostname.replace("www.", "").split(".")[0];
 
@@ -91,18 +91,15 @@ document.onkeydown = async (e) => {
       url = `https://xhamster.com/embed/${location.pathname.split("-").pop()}`;
     }
 
-    const filename = await navigator.clipboard.readText();
-
     const file = `<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
   <key>URL</key>
-  <string>${url}#${encodeURIComponent(filename)}</string>
+  <string>${url}</string>
 </dict>
 </plist>`;
 
-    const downloadUrl = URL.createObjectURL(new Blob([file]));
-    GM_download(downloadUrl, `${filename}.webloc`);
+    GM_download(URL.createObjectURL(new Blob([file])), `${filename}.webloc`);
   }
 };
