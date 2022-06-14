@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Download Web Video
-// @version 7
+// @version 8
 // @match   https://crazyshit.com/cnt/medias/*
 // @match   https://www.pornhub.com/view_video.php?viewkey=*
 // @match   https://crazyshit.com/cnt/medias/*
@@ -16,7 +16,7 @@ let name;
 let url;
 let completed = 0;
 
-document.onkeydown = async (e) => {
+document.addEventListener("keydown", async (e) => {
   if (e.key === "/") {
     switch (location.hostname) {
       case "crazyshit.com":
@@ -103,7 +103,7 @@ document.onkeydown = async (e) => {
       });
     }
   }
-};
+});
 
 const get = async (url, responseType = "text", total, title) => {
   return new Promise((resolve, _) => {

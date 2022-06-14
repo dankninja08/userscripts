@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Search for Model
-// @version 6
+// @version 7
 // @match   https://*/*
 // @grant   GM_xmlhttpRequest
 // ==/UserScript==
@@ -142,7 +142,7 @@ const sites = {
 //   }, 1000);
 // }
 
-document.onkeydown = (e) => {
+document.addEventListener("keydown", (e) => {
   if (e.ctrlKey && e.key === " ") {
     const model = window.prompt("Which model would you like to look up?");
 
@@ -166,7 +166,7 @@ document.onkeydown = (e) => {
       }
     }
   }
-};
+});
 
 const searchBrazzers = (model) => {
   window.open(`https://www.brazzers.com/pornstars?q=${model}`);

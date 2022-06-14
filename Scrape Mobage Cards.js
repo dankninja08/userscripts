@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name    Scrape Mobage Cards
-// @version 2
+// @version 3
 // @match   https://sp.mbga.tv/hsdd/list*
 // @grant   GM_download
 // ==/UserScript==
 
-document.onkeydown = (e) => {
+document.addEventListener("keydown", (e) => {
   if (e.key === "/") {
     [...document.querySelectorAll('a[href^="/hsdd/card/"]')].forEach((card) => {
       const title = card.innerText.split("(")[0];
@@ -23,4 +23,4 @@ document.onkeydown = (e) => {
       }
     });
   }
-};
+});

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Add Chapters to Scene
-// @version 7
+// @version 8
 // @match   https://www.fpo.xxx/embed/*
 // @match   https://hclips.com/embed/*
 // @match   https://hdzog.com/embed/*
@@ -20,7 +20,7 @@
 // @grant   GM_download
 // ==/UserScript==
 
-document.onkeydown = (e) => {
+document.addEventListener("keydown", (e) => {
   let times = decodeURIComponent(location.hash.substring(1))
     .split(",")
     .filter((time) => !!time)
@@ -89,4 +89,4 @@ document.onkeydown = (e) => {
       );
       break;
   }
-};
+});

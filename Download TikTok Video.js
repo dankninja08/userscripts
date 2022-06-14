@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name    Download TikTok Video
-// @version 3
+// @version 4
 // @match   https://www.tiktok.com/*
 // @grant   GM_download
 // ==/UserScript==
 
-document.onkeydown = (e) => {
+document.addEventListener("keydown", (e) => {
   if (e.key === "/") {
     if (location.pathname.includes("/video/")) {
       const slut = location.pathname.split("/")[1];
@@ -30,7 +30,7 @@ document.onkeydown = (e) => {
       }, 1000);
     }
   }
-};
+});
 
 const sortVideos = () => {
   const sorted = [

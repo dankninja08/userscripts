@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Add Scene to Library
-// @version 7
+// @version 8
 // @match   https://www.fpo.xxx/videos/*
 // @match   https://hdzog.com/videos/*
 // @match   https://www.peekvids.com/*
@@ -63,7 +63,7 @@ const sites = {
   },
 };
 
-document.onkeydown = (e) => {
+document.addEventListener("keydown", (e) => {
   if (e.key === "/") {
     const sitename = location.hostname.replace("www.", "").split(".")[0];
 
@@ -102,4 +102,4 @@ document.onkeydown = (e) => {
 
     GM_download(URL.createObjectURL(new Blob([file])), `${sitename}.webloc`);
   }
-};
+});

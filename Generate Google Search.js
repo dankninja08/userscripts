@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Generate Google Search
-// @version 7
+// @version 8
 // @match   https://bangbros.com/*
 // @match   https://www.blowpass.com/*
 // @match   https://dickdrainers.com/*
@@ -12,6 +12,8 @@
 // @match   https://www.mofos.com/*
 // @match   https://www.realitykings.com/*
 //
+// @match   https://brattymilf.com/*
+// @match   https://brattysis.com/*
 // @match   https://nubilefilms.com/*
 // @match   https://nubiles-porn.com/*
 //
@@ -118,6 +120,14 @@ const sites = {
   },
   blowpass: {
     scraper: "Blowpass",
+  },
+  brattymilf: {
+    name: "Bratty MILF",
+    scraper: "Nubiles-Porn",
+  },
+  brattysis: {
+    name: "Bratty Sis",
+    scraper: "Nubiles-Porn",
   },
   brazzers: {
     name: "Brazzers",
@@ -339,7 +349,7 @@ const sites = {
   },
 };
 
-document.onkeydown = (e) => {
+document.addEventListener("keydown", (e) => {
   if (e.key === "/") {
     const components = location.hostname.split(".");
     const name = components[components.length - 2];
@@ -494,11 +504,12 @@ document.onkeydown = (e) => {
               scene.parentElement.parentElement.parentElement
                 .nextElementSibling;
 
-            const site = el
-              .querySelector(".site-link")
-              .innerText.trim()
-              .split(/(?=[A-Z])/)
-              .join(" ");
+            const site =
+              el
+                .querySelector(".site-link")
+                ?.innerText.trim()
+                .split(/(?=[A-Z])/)
+                .join(" ") || sites[name].name;
             const title = el.querySelector(".title a").innerText.trim();
             const girls = [...el.querySelectorAll(".model")]
               .map((el) => el.innerText.trim())
@@ -583,4 +594,4 @@ document.onkeydown = (e) => {
         );
     }
   }
-};
+});
