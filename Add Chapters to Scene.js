@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Add Chapters to Scene
-// @version 8
+// @version 9
 // @match   https://www.fpo.xxx/embed/*
 // @match   https://hclips.com/embed/*
 // @match   https://hdzog.com/embed/*
@@ -17,6 +17,13 @@
 // @match   https://upornia.com/embed/*
 // @match   https://xhamster.com/embed/*
 // @match   https://www.yourpornflare.com/embed/*
+// @match   https://www.youcrazyx.com/embed/*
+
+// @match   https://*.ahcdn.com/*.mp4*
+// @match   https://*.cdntrex.com/remote_control.php?*
+// @match   https://*.pwdn.net/remote_control.php?*
+// @match   https://*.tnaflix.com/*.mp4*
+// @match   https://videos.youcrazyx.com/videos/*
 // @grant   GM_download
 // ==/UserScript==
 
@@ -59,9 +66,17 @@ document.addEventListener("keydown", (e) => {
       video.currentTime = Math.round(video.currentTime + 1);
       break;
 
-    case "p":
-      if (video.paused) video.play();
-      else video.pause();
+    case "x":
+      if (
+        [
+          "www.pornhits.com",
+          "www.porntrex.com",
+          "www.pornwild.com",
+          "player.tnaflix.com",
+          "www.youcrazyx.com",
+        ].includes(location.hostname)
+      )
+        location.href = document.querySelector("video").src + location.hash;
       break;
 
     case "/":
