@@ -1,7 +1,6 @@
 // ==UserScript==
 // @name    Generate Google Search
-// @version 6
-// @match   https://www.adulttime.com/*
+// @version 7
 // @match   https://bangbros.com/*
 // @match   https://www.blowpass.com/*
 // @match   https://dickdrainers.com/*
@@ -77,10 +76,6 @@
 const sites = {
   "1000facials": {
     name: "1000 Facials",
-  },
-  adulttime: {
-    name: "Adult Time",
-    scraper: "Adult Time",
   },
   allanal: {
     name: "All Anal",
@@ -350,24 +345,6 @@ document.onkeydown = (e) => {
     const name = components[components.length - 2];
 
     switch (sites[name].scraper) {
-      case "Adult Time":
-        [...document.querySelectorAll(".SceneThumb-Default img")]
-          .map((el) => el.parentElement)
-          .forEach((scene) => {
-            const el = scene.parentElement.nextElementSibling;
-
-            const site = sites[name].name;
-            const title = el
-              .querySelector(".SceneThumb-SceneInfo-SceneTitle-Link")
-              .innerText.trim();
-            const girls = [
-              ...el.querySelectorAll(".SceneThumb-SceneInfo-Actor-Link"),
-            ]
-              .map((el) => el.innerText.trim())
-              .join(", ");
-
-            scene.href = `https://www.google.com/search?q=${site} - ${girls} - ${title}`;
-          });
       case "Bangbros":
         [...document.querySelectorAll(".thmb_lnk")].forEach((scene) => {
           const el = scene.parentElement;
