@@ -1,12 +1,11 @@
 // ==UserScript==
 // @name    Search for Model
-// @version 4
+// @version 5
 // @match   https://*/*
 // @grant   GM_xmlhttpRequest
 // ==/UserScript==
 
 const directUrls = [
-  "https://www.adulttime.com/actor/",
   "https://www.analmom.com/models/",
   "https://www.badmilfs.com/models/",
   "https://www.bbcparadise.com/models/",
@@ -155,7 +154,14 @@ document.onkeydown = (e) => {
       GM_xmlhttpRequest({
         url: url + model,
         onload: (res) => {
-          if (res.status === 200) window.open(url + model);
+          console.log(res);
+          if (res.status === 200) {
+            if (
+              res.finalUrl.includes("/models/") ||
+              res.finalUrl.includes("/girls/")
+            )
+              window.open(url + model);
+          }
         },
       });
     }
