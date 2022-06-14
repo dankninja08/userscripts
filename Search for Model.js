@@ -1,16 +1,17 @@
 // ==UserScript==
 // @name    Search for Model
-// @version 2
+// @version 3
 // @match   https://*/*
 // @grant   GM_xmlhttpRequest
 // ==/UserScript==
 
-document.onkeydown((e) => {
-  if (e.key === "`") {
+document.onkeydown = (e) => {
+  if (e.ctrlKey && e.key === " ") {
     const model = window.prompt("What model would you like to lookup?");
     searchBrazzers(model);
+    searchSisLovesMe(model);
   }
-});
+};
 
 const searchBrazzers = (model) => {
   GM_xmlhttpRequest({
@@ -19,11 +20,25 @@ const searchBrazzers = (model) => {
       const parser = new DOMParser();
       const doc = parser.parseFromString(res.response, "text/html");
 
-      const link = [
+      const anchor = [
         ...doc.querySelectorAll('span > a[href^="/pornstar/"]'),
       ].find((el) => el.innerText === "Skylar Snow");
 
-      if (link) window.open(link.href.replace("/pornstar", "/videos/models"));
+      if (anchor)
+        window.open(anchor.href.replace("/pornstar", "/videos/models"));
+    },
+  });
+};
+
+const searchSisLovesMe = (model) => {
+  const url = `https://www.sislovesme.com/models/${model
+    .toLowerCase()
+    .replace(" ", "-")}`;
+
+  GM_xmlhttpRequest({
+    url,
+    onload: (res) => {
+      if (res.status === 200) window.open(url);
     },
   });
 };
