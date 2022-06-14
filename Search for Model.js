@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Search for Model
-// @version 1
+// @version 2
 // @match   https://*/*
 // @grant   GM_xmlhttpRequest
 // ==/UserScript==
