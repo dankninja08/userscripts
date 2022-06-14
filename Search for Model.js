@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Search for Model
-// @version 5
+// @version 6
 // @match   https://*/*
 // @grant   GM_xmlhttpRequest
 // ==/UserScript==
@@ -47,7 +47,6 @@ const directUrls = [
   "https://www.sisswap.com/models/",
   "https://spyfam.com/girls/",
   "https://www.teamskeet.com/models/",
-  "https://www.blacked.com/models/",
   "https://www.teensloveblackcocks.com/models/",
   "https://www.thickumz.com/models/",
   "https://tiny4k.com/girls/",
@@ -145,25 +144,26 @@ const sites = {
 
 document.onkeydown = (e) => {
   if (e.ctrlKey && e.key === " ") {
-    const model = window
-      .prompt("What model would you like to lookup?")
-      .toLowerCase()
-      .replace(" ", "-");
+    const model = window.prompt("Which model would you like to look up?");
 
-    for (const url of directUrls) {
-      GM_xmlhttpRequest({
-        url: url + model,
-        onload: (res) => {
-          console.log(res);
-          if (res.status === 200) {
-            if (
-              res.finalUrl.includes("/models/") ||
-              res.finalUrl.includes("/girls/")
-            )
-              window.open(url + model);
-          }
-        },
-      });
+    if (model) {
+      const query = model.toLowerCase().replace(" ", "-");
+
+      for (const url of directUrls) {
+        GM_xmlhttpRequest({
+          url: url + query,
+          onload: (res) => {
+            console.log(res);
+            if (res.status === 200) {
+              if (
+                res.finalUrl.includes("/models/") ||
+                res.finalUrl.includes("/girls/")
+              )
+                window.open(url + query);
+            }
+          },
+        });
+      }
     }
   }
 };
