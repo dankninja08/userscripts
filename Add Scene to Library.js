@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Add Scene to Library
-// @version 8
+// @version 9
 // @match   https://www.fpo.xxx/videos/*
 // @match   https://hdzog.com/videos/*
 // @match   https://www.peekvids.com/*
@@ -16,6 +16,7 @@
 // @match   https://txxx.com/videos/*
 // @match   https://upornia.com/videos/*
 // @match   https://xhamster.com/videos/*
+// @match   https://www.youcrazyx.com/video/*
 // @match   https://www.yourpornflare.com/video/*
 // @exclude https://www.peekvids.com/embed?v=*
 // @exclude https://www.playvids.com/embed/*
@@ -79,6 +80,7 @@ document.addEventListener("keydown", (e) => {
         "playvids",
         "pornflip",
         "pornoeggs",
+        "youcrazyx",
         "yourpornflare",
       ].includes(sitename)
     ) {
