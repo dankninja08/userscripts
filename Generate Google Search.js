@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Generate Google Search
-// @version 8
+// @version 9
 // @match   https://bangbros.com/*
 // @match   https://www.blowpass.com/*
 // @match   https://dickdrainers.com/*
@@ -14,6 +14,8 @@
 //
 // @match   https://brattymilf.com/*
 // @match   https://brattysis.com/*
+// @match   https://deeplush.com/*
+// @match   https://nfbusty.com/*
 // @match   https://nubilefilms.com/*
 // @match   https://nubiles-porn.com/*
 //
@@ -149,6 +151,10 @@ const sites = {
     name: "Deeper",
     scraper: "Blacked",
   },
+  deeplush: {
+    name: "Deep Lush",
+    scraper: "Nubiles-Porn",
+  },
   dickdrainers: {
     name: "Dick Drainers",
     scraper: "Dick Drainers",
@@ -227,6 +233,10 @@ const sites = {
   },
   naughtyamerica: {
     scraper: "Naughty America",
+  },
+  nfbusty: {
+    name: "NF Busty",
+    scraper: "Nubiles-Porn",
   },
   notmygrandpa: {
     name: "Not My Grandpa",
