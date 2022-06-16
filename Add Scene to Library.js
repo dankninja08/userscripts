@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Add Scene to Library
-// @version 10
+// @version 11
 // @match   https://fapster.xxx/videos/*
 // @match   https://www.fpo.xxx/videos/*
 // @match   https://www.mypornhere.com/videos/*
@@ -56,20 +56,16 @@ const sites = {
   "xhamster.com": () => `/embed/${location.pathname.split("-").pop()}`,
   "www.youcrazyx.com": () =>
     `/embed/${location.pathname.split("-").pop().split(".")[0]}`,
-  "www.yourpornflare": () =>
+  "www.yourpornflare.com": () =>
     `/embed/${location.pathname.split("-").pop().split(".")[0]}`,
 };
 
-document.addEventListener("keydown", (e) => {
-  if (e.key === "/") {
-    const url = new URL(location.href);
+const url = new URL(location.href);
 
-    url.pathname = sites[location.hostname]();
-    url.hostname = location.hostname.replace(
-      "www.tnaflix.com",
-      "player.tnaflix.com"
-    );
+url.pathname = sites[location.hostname]().replace("%3F", "?");
+url.hostname = location.hostname.replace(
+  "www.tnaflix.com",
+  "player.tnaflix.com"
+);
 
-    location.href = url.href;
-  }
-});
+window.open(url.href.replace("%3F", "?"));
