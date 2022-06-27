@@ -1,26 +1,33 @@
 // ==UserScript==
 // @name    Add Chapters to Scene
-// @version 11
+// @version 12
 // @match   https://*/*.mp4*
 // @match   https://*.fpo.xxx/remote_control.php?file=*
-// @grant   GM_download
-// @grant   GM_xmlhttpRequest
 // ==/UserScript==
 
-window.history.replaceState("", "", "/" + location.hash);
+window.history.replaceState('', '', '/' + location.hash);
 
-document.addEventListener("keydown", (e) => {
+const div = document.createElement('div');
+div.style.display = 'flex';
+div.style.overflowX = 'auto';
+
+document.body.appendChild(div);
+
+let done = false;
+let index = 0;
+
+document.addEventListener('keydown', (e) => {
   let times = decodeURIComponent(location.hash.substring(1))
-    .split(";")[0]
-    .split(",")
+    .split(';')[0]
+    .split(',')
     .filter((time) => !!time)
-    .map((time) => parseInt(time));
+    .map((time) => parseFloat(time));
 
-  const video = document.querySelector("video");
+  const video = document.querySelector('video');
   const currTime = video.currentTime;
 
   switch (e.key) {
-    case "ArrowLeft":
+    case '[':
       if (currTime > times[0]) {
         const i = times.findIndex((time) => time > currTime) - 1;
 
@@ -36,12 +43,12 @@ document.addEventListener("keydown", (e) => {
       }
       break;
 
-    case "ArrowRight":
+    case ']':
       if (currTime < times[times.length - 1])
         video.currentTime = times[times.findIndex((time) => time > currTime)];
       break;
 
-    case ",":
+    case ',':
       video.currentTime = Number.isInteger(currTime)
         ? currTime - 1
         : video.paused
@@ -49,45 +56,77 @@ document.addEventListener("keydown", (e) => {
         : Math.floor(currTime - 1);
       break;
 
-    case ".":
+    case '.':
       video.currentTime = Number.isInteger(currTime)
         ? currTime + 1
         : Math.ceil(currTime);
       break;
 
-    case "/":
+    case 'ArrowLeft':
+      video.currentTime -= 5;
+      break;
+
+    case 'ArrowRight':
+      video.currentTime += 5;
+      break;
+
+    case '/':
       if (times.includes(currTime)) times = times.filter((t) => t !== currTime);
       else times = [...times, currTime].sort((a, b) => a - b);
 
-      location.hash = `${times.join(",")};${location.hash.split(";")[1]}`;
+      location.hash = `${times.join(',')};${location.hash.split(';')[1]}`;
       break;
 
-    case "d":
-      GM_xmlhttpRequest({
-        url: video.src || document.querySelector("source").src,
-        responseType: "blob",
-        onprogress: (progress) => {
-          document.title = `${Math.round(
-            (progress.loaded / progress.total) * 100
-          )}%`;
-        },
-        onload: (res) => {
-          video.src = URL.createObjectURL(res.response);
-        },
+    case '=':
+      video.addEventListener('seeked', () => {
+        if (!done) {
+          const canvas = document.createElement('canvas');
+          canvas.height = 144;
+          canvas.width = 256;
+
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+          const img = new Image();
+          img.src = canvas.toDataURL();
+
+          const time = times[index - 1];
+
+          const button = document.createElement('button');
+          button.onclick = () => {
+            video.currentTime = time;
+          };
+          button.appendChild(img);
+          div.appendChild(button);
+
+          if (video.currentTime === times[times.length - 1]) done = true;
+          else video.currentTime = times[index++];
+        }
       });
+
+      video.currentTime = times[index++];
       break;
 
-    case "s":
-      const url = new URL(location.hash.split(";")[1] || location.href);
-      url.hash = location.hash.split(";")[0];
+    case 's':
+      const url = new URL(location.hash.split(';')[1] || location.href);
+      url.hash = location.hash.split(';')[0];
 
-      const file = `[InternetShortcut]
-URL=${url.href}`;
+      const file = `<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+  <plist version="1.0">
+  <dict>
+    <key>URL</key>
+    <string>${url}</string>
+  </dict>
+  </plist>`;
 
-      GM_download(
-        URL.createObjectURL(new Blob([file])),
-        `${url.hostname.replace("www.", "").split(".")[0]}.url`
-      );
+      const anchor = document.createElement('a');
+      anchor.href = URL.createObjectURL(new Blob([file]));
+      anchor.download = `${
+        url.hostname.replace('www.', '').split('.')[0]
+      }.webloc`;
+
+      anchor.click();
       break;
   }
 });
