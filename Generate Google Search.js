@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name    Generate Google Search
-// @version 9
+// @version 10
 // @match   https://bangbros.com/*
 // @match   https://www.blowpass.com/*
 // @match   https://dickdrainers.com/*
 // @match   https://manuelferrara.com/*
 // @match   https://www.naughtyamerica.com/*
+// @match   https://www.spankmonster.com/*
 //
 // @match   https://www.brazzers.com/*
 // @match   https://www.fakehub.com/*
@@ -78,530 +79,215 @@
 // ==/UserScript==
 
 const sites = {
-  "1000facials": {
-    name: "1000 Facials",
-  },
-  allanal: {
-    name: "All Anal",
-    scraper: "Swallowed",
-  },
-  analmom: {
-    name: "Anal Mom",
-    scraper: "Sis Loves Me",
-  },
-  analonly: {
-    name: "Anal Only",
-    scraper: "Swallowed",
-  },
-  badmilfs: {
-    name: "Bad MILFs",
-    scraper: "Sis Loves Me",
-  },
-  bangbros: {
-    scraper: "Bangbros",
-  },
-  bbcparadise: {
-    name: "BBC Paradise",
-    scraper: "Sis Loves Me",
-  },
-  bbcpie: {
-    name: "BBC Pie",
-    scraper: "Porn Pros",
-  },
-  bffs: {
-    name: "BFFs",
-    scraper: "Sis Loves Me",
-  },
-  blacked: {
-    name: "Blacked",
-    scraper: "Blacked",
-  },
-  blackedraw: {
-    name: "Blacked Raw",
-    scraper: "Blacked",
-  },
-  blowpass: {
-    scraper: "Blowpass",
-  },
-  brattymilf: {
-    name: "Bratty MILF",
-    scraper: "Nubiles-Porn",
-  },
-  brattysis: {
-    name: "Bratty Sis",
-    scraper: "Nubiles-Porn",
-  },
-  brazzers: {
-    name: "Brazzers",
-    scraper: "Brazzers",
-  },
-  cum4k: {
-    name: "Cum 4K",
-    scraper: "Porn Pros",
-  },
-  dadcrush: {
-    name: "Dad Crush",
-    scraper: "Sis Loves Me",
-  },
-  daughterswap: {
-    name: "Daughter Swap",
-    scraper: "Sis Loves Me",
-  },
-  deeper: {
-    name: "Deeper",
-    scraper: "Blacked",
-  },
-  deeplush: {
-    name: "Deep Lush",
-    scraper: "Nubiles-Porn",
-  },
-  dickdrainers: {
-    name: "Dick Drainers",
-    scraper: "Dick Drainers",
-  },
-  facials4k: {
-    name: "Facials 4K",
-    scraper: "Porn Pros",
-  },
-  fakehub: {
-    scraper: "Brazzers",
-  },
-  familystrokes: {
-    name: "Family Strokes",
-    scraper: "Sis Loves Me",
-  },
-  fostertapes: {
-    name: "Foster Tapes",
-    scraper: "Sis Loves Me",
-  },
-  freeusefantasy: {
-    name: "Freeuse Fantasy",
-    scraper: "Sis Loves Me",
-  },
-  freeusemilf: {
-    name: "Freeuse MILF",
-    scraper: "Sis Loves Me",
-  },
-  girlcum: {
-    name: "Girl Cum",
-    scraper: "Porn Pros",
-  },
-  hijabhookup: {
-    name: "Hijab Hookup",
-    scraper: "Sis Loves Me",
-  },
-  holed: {
-    name: "Holed",
-    scraper: "Porn Pros",
-  },
-  littleasians: {
-    name: "Little Asians",
-    scraper: "Sis Loves Me",
-  },
-  manuelferrara: {
-    name: "Manuel Ferrara",
-    scraper: "Manuel Ferrara",
-  },
-  mofos: {
-    scraper: "Brazzers",
-  },
-  mom4k: {
-    name: "Mom 4K",
-    scraper: "Porn Pros",
-  },
-  mommyblowsbest: {
-    name: "Mommy Blows Best",
-  },
-  momswap: {
-    name: "Mom Swap",
-    scraper: "Sis Loves Me",
-  },
-  mylf: {
-    scraper: "Team Skeet",
-  },
-  mylfdom: {
-    name: "Mylf Dom",
-    scraper: "Sis Loves Me",
-  },
-  myveryfirsttime: {
-    name: "My Very First Time",
-    scraper: "Porn Pros",
-  },
-  nannyspy: {
-    name: "Nanny Spy",
-    scraper: "Porn Pros",
-  },
-  naughtyamerica: {
-    scraper: "Naughty America",
-  },
-  nfbusty: {
-    name: "NF Busty",
-    scraper: "Nubiles-Porn",
-  },
-  notmygrandpa: {
-    name: "Not My Grandpa",
-    scraper: "Sis Loves Me",
-  },
-  nubilefilms: {
-    scraper: "Nubiles-Porn",
-  },
-  "nubiles-porn": {
-    scraper: "Nubiles-Porn",
-  },
-  nympho: {
-    name: "Nympho",
-    scraper: "Swallowed",
-  },
-  onlyteenblowjobs: {
-    name: "Only Teen Blowjobs",
-  },
-  "passion-hd": {
-    name: "Passion HD",
-    scraper: "Porn Pros",
-  },
-  pervdoctor: {
-    name: "Perv Doctor",
-    scraper: "Sis Loves Me",
-  },
-  pervmom: {
-    name: "Perv Mom",
-    scraper: "Sis Loves Me",
-  },
-  pervnana: {
-    name: "Perv Nana",
-    scraper: "Sis Loves Me",
-  },
-  pervtherapy: {
-    name: "Perv Therapy",
-    scraper: "Sis Loves Me",
-  },
-  pornpros: {
-    name: "Porn Pros",
-    scraper: "Porn Pros",
-  },
-  povd: {
-    name: "POVD",
-    scraper: "Porn Pros",
-  },
-  puremature: {
-    name: "Pure Mature",
-    scraper: "Porn Pros",
-  },
-  realitykings: {
-    name: "Reality Kings",
-    scraper: "Brazzers",
-  },
-  shoplyfter: {
-    name: "Shoplyfter",
-    scraper: "Sis Loves Me",
-  },
-  shoplyftermylf: {
-    name: "Shoplyfter Mylf",
-    scraper: "Sis Loves Me",
-  },
-  sislovesme: {
-    name: "Sis Loves Me",
-    scraper: "Sis Loves Me",
-  },
-  sisswap: {
-    name: "Sis Swap",
-    scraper: "Sis Loves Me",
-  },
-  spankmonster: {
-    name: "Spank Monster",
-    scraper: "Spank Monster",
-  },
-  spyfam: {
-    name: "Spy Fam",
-    scraper: "Porn Pros",
-  },
-  swallowed: {
-    name: "Swallowed",
-    scraper: "Swallowed",
-  },
-  teamskeet: {
-    scraper: "Team Skeet",
-  },
+  '1000facials': { name: '1000 Facials' },
+  allanal: { name: 'All Anal', scraper: 'Swallowed' },
+  analmom: { name: 'Anal Mom', scraper: 'Sis Loves Me' },
+  analonly: { name: 'Anal Only', scraper: 'Swallowed' },
+  badmilfs: { name: 'Bad MILFs', scraper: 'Sis Loves Me' },
+  bangbros: { scraper: 'Bangbros' },
+  bbcparadise: { name: 'BBC Paradise', scraper: 'Sis Loves Me' },
+  bbcpie: { name: 'BBC Pie', scraper: 'Porn Pros' },
+  bffs: { name: 'BFFs', scraper: 'Sis Loves Me' },
+  blacked: { name: 'Blacked', scraper: 'Blacked' },
+  blackedraw: { name: 'Blacked Raw', scraper: 'Blacked' },
+  blowpass: { scraper: 'Blowpass' },
+  brattymilf: { name: 'Bratty MILF', scraper: 'Nubiles-Porn' },
+  brattysis: { name: 'Bratty Sis', scraper: 'Nubiles-Porn' },
+  brazzers: { name: 'Brazzers', scraper: 'Brazzers' },
+  cum4k: { name: 'Cum 4K', scraper: 'Porn Pros' },
+  dadcrush: { name: 'Dad Crush', scraper: 'Sis Loves Me' },
+  daughterswap: { name: 'Daughter Swap', scraper: 'Sis Loves Me' },
+  deeper: { name: 'Deeper', scraper: 'Blacked' },
+  deeplush: { name: 'Deep Lush', scraper: 'Nubiles-Porn' },
+  dickdrainers: { name: 'Dick Drainers', scraper: 'Dick Drainers' },
+  facials4k: { name: 'Facials 4K', scraper: 'Porn Pros' },
+  fakehub: { name: 'Fake Hub', scraper: 'Brazzers' },
+  familystrokes: { name: 'Family Strokes', scraper: 'Sis Loves Me' },
+  fostertapes: { name: 'Foster Tapes', scraper: 'Sis Loves Me' },
+  freeusefantasy: { name: 'Freeuse Fantasy', scraper: 'Sis Loves Me' },
+  freeusemilf: { name: 'Freeuse MILF', scraper: 'Sis Loves Me' },
+  girlcum: { name: 'Girl Cum', scraper: 'Porn Pros' },
+  hijabhookup: { name: 'Hijab Hookup', scraper: 'Sis Loves Me' },
+  holed: { name: 'Holed', scraper: 'Porn Pros' },
+  littleasians: { name: 'Little Asians', scraper: 'Sis Loves Me' },
+  manuelferrara: { name: 'Manuel Ferrara', scraper: 'Manuel Ferrara' },
+  mofos: { name: 'Mofos', scraper: 'Brazzers' },
+  mom4k: { name: 'Mom 4K', scraper: 'Porn Pros' },
+  mommyblowsbest: { name: 'Mommy Blows Best' },
+  momswap: { name: 'Mom Swap', scraper: 'Sis Loves Me' },
+  mylf: { scraper: 'Team Skeet' },
+  mylfdom: { name: 'Mylf Dom', scraper: 'Sis Loves Me' },
+  myveryfirsttime: { name: 'My Very First Time', scraper: 'Porn Pros' },
+  nannyspy: { name: 'Nanny Spy', scraper: 'Porn Pros' },
+  naughtyamerica: { scraper: 'Naughty America' },
+  nfbusty: { name: 'NF Busty', scraper: 'Nubiles-Porn' },
+  notmygrandpa: { name: 'Not My Grandpa', scraper: 'Sis Loves Me' },
+  nubilefilms: { scraper: 'Nubiles-Porn' },
+  'nubiles-porn': { scraper: 'Nubiles-Porn' },
+  nympho: { name: 'Nympho', scraper: 'Swallowed' },
+  onlyteenblowjobs: { name: 'Only Teen Blowjobs' },
+  'passion-hd': { name: 'Passion HD', scraper: 'Porn Pros' },
+  pervdoctor: { name: 'Perv Doctor', scraper: 'Sis Loves Me' },
+  pervmom: { name: 'Perv Mom', scraper: 'Sis Loves Me' },
+  pervnana: { name: 'Perv Nana', scraper: 'Sis Loves Me' },
+  pervtherapy: { name: 'Perv Therapy', scraper: 'Sis Loves Me' },
+  pornpros: { name: 'Porn Pros', scraper: 'Porn Pros' },
+  povd: { name: 'POVD', scraper: 'Porn Pros' },
+  puremature: { name: 'Pure Mature', scraper: 'Porn Pros' },
+  realitykings: { name: 'Reality Kings', scraper: 'Brazzers' },
+  shoplyfter: { name: 'Shoplyfter', scraper: 'Sis Loves Me' },
+  shoplyftermylf: { name: 'Shoplyfter Mylf', scraper: 'Sis Loves Me' },
+  sislovesme: { name: 'Sis Loves Me', scraper: 'Sis Loves Me' },
+  sisswap: { name: 'Sis Swap', scraper: 'Sis Loves Me' },
+  spankmonster: { name: 'Spank Monster', scraper: 'Spank Monster' },
+  spyfam: { name: 'Spy Fam', scraper: 'Porn Pros' },
+  swallowed: { name: 'Swallowed', scraper: 'Swallowed' },
+  teamskeet: { scraper: 'Team Skeet' },
   teensloveblackcocks: {
-    name: "Teens Love Black Cocks",
-    scraper: "Sis Loves Me",
+    name: 'Teens Love Black Cocks',
+    scraper: 'Sis Loves Me',
   },
-  thickumz: {
-    name: "Thickumz",
-    scraper: "Sis Loves Me",
+  thickumz: { name: 'Thickumz', scraper: 'Sis Loves Me' },
+  throated: { name: 'Throated' },
+  tiny4k: { name: 'Tiny 4K', scraper: 'Porn Pros' },
+  tinysis: { name: 'Tiny Sis', scraper: 'Sis Loves Me' },
+  trueanal: { name: 'True Anal', scraper: 'Swallowed' },
+  tushy: { name: 'Tushy', scraper: 'Blacked' },
+  tushyraw: { name: 'Tushy Raw', scraper: 'Blacked' },
+  vixen: { name: 'Vixen', scraper: 'Blacked' },
+};
+
+const scrapers = {
+  Bangbros: {
+    link: 'a[href^="/video"]:not([href^="/videos"])',
+    site: '.vdoCast > a[href^="/websites/"]',
+    title: 'h1',
+    girls: '.vdoCast > a[href^="/model"]',
   },
-  throated: {
-    name: "Throated",
+  Blacked: {
+    link: 'a[href^="/videos/"]',
+    title: 'h1[data-test-component]',
+    girls: 'div[data-test-component="VideoModels"] a',
   },
-  tiny4k: {
-    name: "Tiny 4K",
-    scraper: "Porn Pros",
+  Blowpass: {
+    link: 'a[href^="/en/video/"]',
+    title: '.sceneTitle',
+    girls: '.actorCarousel a',
   },
-  tinysis: {
-    name: "Tiny Sis",
-    scraper: "Sis Loves Me",
+  Brazzers: {
+    link: 'a[href^="/video/"], a[href^="/scene/"]',
+    title: 'h1, h2',
+    girls: 'h1, h2 + div a',
   },
-  trueanal: {
-    name: "True Anal",
-    scraper: "Swallowed",
+  'Dick Drainers': {
+    link: 'a[href^="https://dickdrainers.com/tour/trailers/"]',
+    title: 'h3',
+    girls: '.update_models a',
   },
-  tushy: {
-    name: "Tushy",
-    scraper: "Blacked",
+  'Manuel Ferrara': {
+    link: 'a[href^="https://manuelferrara.com/trial/scenes/"]',
+    title: '.title_bar_hilite',
+    girls: '.backgroundcolor_info > .update_models > a',
   },
-  tushyraw: {
-    name: "Tushy Raw",
-    scraper: "Blacked",
+  'Naughty America': {
+    link: 'a[href^="https://www.naughtyamerica.com/scene/"]',
+    site: '.site-title',
+    title: 'h1.scene-title',
+    girls: '.performer-list > a',
   },
-  vixen: {
-    name: "Vixen",
-    scraper: "Blacked",
+  'Nubiles-Porn': {
+    link: 'a[href^="/video/watch/"]',
+    title: 'h2',
+    girls: '.content-pane-performer',
+  },
+  'Porn Pros': {
+    link: 'a[href^="/video/"]',
+    title: 'h1.t2019-stitle',
+    girls: '#t2019-models > a',
+  },
+  'Sis Loves Me': {
+    link: 'a[href^="/movies/"]',
+    title: '.video-title',
+    girls: '.video-content .model-name-link',
+  },
+  'Spank Monster': {
+    link: 'a[href$="-streaming-scene-video.html"]',
+    title: 'h1.description',
+    girls: '.video-performer-name > span',
+  },
+  Swallowed: {
+    link: 'a[href^="https://tour.swallowed.com/view/"], a[href^="/scenes/"]',
+    title: '.title',
+    girls: '.content-meta-wrap a',
+  },
+  'Team Skeet': {
+    link: 'a[href^="/movies/"]',
+    site: '.siteName > a',
+    title: '.sceneTitle',
+    girls: '.model-name-link',
   },
 };
 
-document.addEventListener("keydown", (e) => {
-  if (e.key === "/") {
-    const components = location.hostname.split(".");
-    const name = components[components.length - 2];
+const components = location.hostname.split('.');
+const name = components[components.length - 2];
 
-    switch (sites[name].scraper) {
-      case "Bangbros":
-        [...document.querySelectorAll(".thmb_lnk")].forEach((scene) => {
-          const el = scene.parentElement;
+const scraper = sites[name].scraper;
 
-          const site = el.querySelector(".thmb_mr_lnk span").innerText.trim();
-          const title = el.querySelector(".thmb_ttl").innerText.trim();
-          const girls = [...el.querySelectorAll(".cast")]
-            .map((el) => el.innerText.trim())
-            .join(", ");
+const int = setInterval(() => {
+  const list = [...document.querySelectorAll(scrapers[scraper].link)];
 
-          scene.href = `https://www.google.com/search?q=${site} - ${girls} - ${title}`;
-        });
-      case "Blacked":
-        [
-          ...document.querySelectorAll('a[class^="VideoThumbnailPreview"]'),
-        ].forEach((scene) => {
-          const el = scene.parentElement.nextElementSibling;
+  if (list.length > 0) {
+    list.forEach((scene) => {
+      scene.addEventListener('click', async (e) => {
+        e.preventDefault();
 
-          const site = sites[name].name;
-          const title = el
-            .querySelector('a[data-test-component="TitleLink"]')
-            ?.innerText.trim();
-          const girls = [
-            ...el.querySelectorAll('div[data-test-component="Models"] a'),
-          ]
-            .map((el) =>
-              el.innerText
-                .trim()
-                .toLowerCase()
-                .split(" ")
-                .map((word) => word[0].toUpperCase() + word.slice(1))
-                .join(" ")
-            )
-            .join(", ");
+        const res = await fetch(scene.href);
+        const data = await res.text();
 
-          scene.href = `https://www.google.com/search?q=${site} - ${girls} - ${title}`;
-        });
-      case "Blowpass":
-        [...document.querySelectorAll(".imgLink")].forEach((scene) => {
-          const el = scene.nextElementSibling;
+        const doc = new DOMParser().parseFromString(data, 'text/html');
 
-          const site =
-            sites[
-              el
-                .querySelector(".fromSite strong")
-                .innerText.trim()
-                .split(".")[0]
-            ].name;
-          const title = el.querySelector(".sceneTitle a").innerText.trim();
-          const girls = [...el.querySelector(".sceneActors").children]
-            .map((el) => el.innerText.trim())
-            .join(", ");
-
-          scene.href = `https://www.google.com/search?q=${site} - ${girls} - ${title}`;
-        });
-      case "Brazzers":
-        [...document.querySelectorAll('a[href^="/video/"], a[href^="/scene/"]')]
-          .filter((el) => el.children.length > 0)
-          .forEach((scene) => {
-            const el = scene.parentElement.nextElementSibling;
-
-            const site =
-              el.querySelector('a[href^="/scenes?site="]')?.children[1]
-                .innerText || sites[name].name;
-            const title = el
-              .querySelector('a[href^="/video/"], a[href^="/scene/"]')
-              .innerText.trim();
-            const girls = [
-              ...el.querySelectorAll(
-                'a[href^="/pornstar/"], a[href^="/model/"], a[href^="/modelprofile/"]'
-              ),
-            ]
-              .map((el) => el.innerText.trim())
-              .join(", ");
-
-            scene.href = `https://www.google.com/search?q=${site} - ${girls} - ${title}`;
-          });
-      case "Dick Drainers":
-        [...document.querySelectorAll(".left a, .item-thumb a")].forEach(
-          (scene) => {
-            const el = scene.parentElement.parentElement;
-
-            const site = sites[name].name;
-            const title = location.href.includes("/movies/")
-              ? el.parentElement
-                  .querySelector("h3 a")
-                  .innerText.trim()
-                  .toLowerCase()
-                  .split(" ")
-                  .map((word) => word[0].toUpperCase() + word.slice(1))
-                  .join(" ")
-              : el.querySelector("h4 a").innerText.trim();
-            const girls = location.href.includes("/movies/")
-              ? [...el.parentElement.querySelectorAll(".update_models a")]
-                  .map((el) => el.innerText.trim())
-                  .join(", ")
-              : el.parentElement.parentElement
-                  .querySelector("h3")
-                  .innerText.trim()
-                  .replace(" VIDEO UPDATES", "")
-                  .toLowerCase()
-                  .split(" ")
-                  .map((word) => word[0].toUpperCase() + word.slice(1))
-                  .join(" ");
-
-            scene.href = `https://www.google.com/search?q=${site} - ${girls} - ${title}`;
-          }
-        );
-      case "Manuel Ferrara":
-        [...document.querySelectorAll(".update_details")]
-          .map((el) => el.children[0])
-          .forEach((scene) => {
-            const el = scene.parentElement;
-
-            const site = sites[name].name;
-            const title = el.children[2].innerText.trim();
-            const girls = [...el.querySelectorAll(".update_models a")]
-              .map((el) => el.innerText.trim())
-              .filter((girl) => girl !== "Manuel Ferrara")
-              .join(", ");
-
-            scene.href = `https://www.google.com/search?q=${site} - ${girls} - ${title}`;
-          });
-      case "Naughty America":
-        [...document.querySelectorAll(".scene-item .contain-img")].forEach(
-          (scene) => {
-            const el = scene.parentElement;
-
-            const site = el.querySelector(".site-title").innerText.trim();
-            const girls = [...el.querySelectorAll(".contain-actors a")]
-              .map((el) => el.innerText.trim())
-              .join(", ");
-
-            scene.href = `https://www.google.com/search?q=${site} - ${girls}`;
-          }
-        );
-      case "Nubiles-Porn":
-        [...document.querySelectorAll(".img-wrapper")]
-          .map(
-            (el) =>
-              el.children[0].querySelector('a[href^="/video/watch/"]') ||
-              el.children[1]
-          )
-          .forEach((scene) => {
-            const el =
-              scene.parentElement.nextElementSibling ||
-              scene.parentElement.parentElement.parentElement
-                .nextElementSibling;
-
-            const site =
-              el
-                .querySelector(".site-link")
+        const site =
+          scraper === 'Blowpass'
+            ? sites[
+                doc
+                  .querySelector('.siteNameSpan')
+                  .innerText.toLowerCase()
+                  .replace('.com', '')
+              ].name
+            : scraper === 'Nubiles-Porn'
+            ? doc
+                .querySelector('.site-link')
                 ?.innerText.trim()
                 .split(/(?=[A-Z])/)
-                .join(" ") || sites[name].name;
-            const title = el.querySelector(".title a").innerText.trim();
-            const girls = [...el.querySelectorAll(".model")]
-              .map((el) => el.innerText.trim())
-              .join(", ");
+                .join(' ')
+                .replace('.com', '') || sites[name].name
+            : doc.querySelector(scrapers[scraper].site)?.innerText.trim() ||
+              sites[name].name;
 
-            scene.href = `https://www.google.com/search?q=${site} - ${girls} - ${title}`;
-          });
-      case "Porn Pros":
-        [...document.querySelectorAll(".card > a")].forEach((scene) => {
-          const el = scene.nextElementSibling;
+        const title = doc
+          .querySelector(scrapers[scraper].title)
+          .innerText.trim();
 
-          const site = sites[name].name;
-          const title = el.querySelector(".card-title").innerText.trim();
-          const girls = [...el.querySelectorAll(".actors a")]
-            .map((el) => el.innerText.trim())
-            .join(", ");
-
-          scene.href = `https://www.google.com/search?q=${site} - ${girls} - ${title}`;
-        });
-      case "Sis Loves Me":
-        [...document.querySelectorAll(".videoimg_wrapper a")].forEach(
-          (scene) => {
-            const el = scene.parentElement.parentElement.nextElementSibling;
-
-            const site = sites[name].name;
-            const title = el.querySelector(".title a").innerText.trim();
-            const girls = [...el.querySelectorAll(".model-name-link")]
-              .map((el) => el.innerText.trim())
-              .join(", ");
-
-            scene.href = `https://www.google.com/search?q=${site} - ${girls} - ${title}`;
-          }
-        );
-      case "Swallowed":
-        [...document.querySelectorAll(".thumb-full a, .lg-thumb a")].forEach(
-          (scene) => {
-            const el =
-              scene.parentElement.parentElement.parentElement
-                .nextElementSibling;
-
-            const site = sites[name].name;
-            const title = el
-              .querySelector(".title a, .content-title-wrap a")
-              .innerText.trim()
-              .toLowerCase()
-              .split(" ")
-              .map((word) => word[0].toUpperCase() + word.slice(1))
-              .join(" ");
-
-            const girls = [
-              ...el.querySelectorAll(".models a, .content-models a"),
-            ]
-              .map((el) =>
-                el.innerText
+        const girls = [...doc.querySelectorAll(scrapers[scraper].girls)]
+          .map((el) =>
+            scraper === 'Blacked'
+              ? el.innerText
                   .trim()
-                  .replace(",", "")
                   .toLowerCase()
-                  .split(" ")
+                  .split(' ')
                   .map((word) => word[0].toUpperCase() + word.slice(1))
-                  .join(" ")
-              )
-              .join(", ");
+                  .join(' ')
+              : el.innerText.trim()
+          )
+          .join(', ')
+          .replace(',,', ',');
 
-            scene.href = `https://www.google.com/search?q=${site} - ${girls} - ${title}`;
-          }
+        window.open(
+          `https://www.google.com/search?q=${site} - ${girls} - ${title}`
         );
-      case "Team Skeet":
-        [...document.querySelectorAll(".videoimg_wrapper a")].forEach(
-          (scene) => {
-            const el = scene.parentElement.nextElementSibling;
+      });
+    });
 
-            const site = el.querySelector(".py-1 small").innerText.trim();
-            const title = el
-              .querySelector(".description small")
-              .innerText.trim();
-            const girls = [...el.querySelectorAll(".model-name-link")]
-              .map((el) => el.innerText.trim())
-              .join(", ");
-
-            scene.href = `https://www.google.com/search?q=${site} - ${girls} - ${title}`;
-          }
-        );
-    }
+    clearInterval(int);
   }
-});
+}, 100);
