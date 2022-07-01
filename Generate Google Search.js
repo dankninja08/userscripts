@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name    Generate Google Search
-// @version 10
+// @version 11
 // @match   https://bangbros.com/*
 // @match   https://www.blowpass.com/*
 // @match   https://dickdrainers.com/*
@@ -8,6 +8,7 @@
 // @match   https://www.naughtyamerica.com/*
 // @match   https://www.spankmonster.com/*
 //
+// @match   https://www.babes.com/*
 // @match   https://www.brazzers.com/*
 // @match   https://www.fakehub.com/*
 // @match   https://www.mofos.com/*
@@ -83,6 +84,7 @@ const sites = {
   allanal: { name: 'All Anal', scraper: 'Swallowed' },
   analmom: { name: 'Anal Mom', scraper: 'Sis Loves Me' },
   analonly: { name: 'Anal Only', scraper: 'Swallowed' },
+  babes: { name: 'Babes', scraper: 'Brazzers' },
   badmilfs: { name: 'Bad MILFs', scraper: 'Sis Loves Me' },
   bangbros: { scraper: 'Bangbros' },
   bbcparadise: { name: 'BBC Paradise', scraper: 'Sis Loves Me' },
@@ -176,8 +178,9 @@ const scrapers = {
   },
   Brazzers: {
     link: 'a[href^="/video/"], a[href^="/scene/"]',
+    site: 'section a[href^="/scenes?site="] :last-child',
     title: 'h1, h2',
-    girls: 'h1, h2 + div a',
+    girls: 'h1 + div a, h2 + div a, h2 + h2 a',
   },
   'Dick Drainers': {
     link: 'a[href^="https://dickdrainers.com/tour/trailers/"]',
@@ -233,61 +236,86 @@ const name = components[components.length - 2];
 
 const scraper = sites[name].scraper;
 
-const int = setInterval(() => {
-  const list = [...document.querySelectorAll(scrapers[scraper].link)];
+const handler = (list) => {
+  for (const scene of list) {
+    scene.addEventListener('click', async (e) => {
+      e.preventDefault();
 
-  if (list.length > 0) {
-    list.forEach((scene) => {
-      scene.addEventListener('click', async (e) => {
-        e.preventDefault();
+      const res = await fetch(scene.href);
+      const data = await res.text();
+      const doc = new DOMParser().parseFromString(data, 'text/html');
 
-        const res = await fetch(scene.href);
-        const data = await res.text();
+      const site =
+        name === 'realitykings'
+          ? doc.querySelector('a[href^="/scenes?site="]').textContent.trim()
+          : name === 'babes'
+          ? doc
+              .querySelector('a[href^="/scenes?site="]')
+              .textContent.trim()
+              .trim()
+              .toLowerCase()
+              .split(' ')
+              .map((word) => word[0].toUpperCase() + word.slice(1))
+              .join(' ')
+          : scraper === 'Nubiles-Porn'
+          ? doc
+              .querySelector('.site-link')
+              ?.innerText.trim()
+              .split(/(?=[A-Z])/)
+              .join(' ')
+              .replace('.com', '') || sites[name].name
+          : scraper === 'Blowpass'
+          ? sites[
+              doc
+                .querySelector('.siteNameSpan')
+                .innerText.toLowerCase()
+                .replace('.com', '')
+            ].name
+          : doc.querySelector(scrapers[scraper].site)?.innerText.trim() ||
+            sites[name].name;
 
-        const doc = new DOMParser().parseFromString(data, 'text/html');
+      const title = doc.querySelector(scrapers[scraper].title).innerText.trim();
 
-        const site =
-          scraper === 'Blowpass'
-            ? sites[
-                doc
-                  .querySelector('.siteNameSpan')
-                  .innerText.toLowerCase()
-                  .replace('.com', '')
-              ].name
-            : scraper === 'Nubiles-Porn'
-            ? doc
-                .querySelector('.site-link')
-                ?.innerText.trim()
-                .split(/(?=[A-Z])/)
+      const girls = [...doc.querySelectorAll(scrapers[scraper].girls)]
+        .map((el) =>
+          scraper === 'Blacked'
+            ? el.innerText
+                .trim()
+                .toLowerCase()
+                .split(' ')
+                .map((word) => word[0].toUpperCase() + word.slice(1))
                 .join(' ')
-                .replace('.com', '') || sites[name].name
-            : doc.querySelector(scrapers[scraper].site)?.innerText.trim() ||
-              sites[name].name;
+            : el.innerText.trim()
+        )
+        .join(', ')
+        .replace(',,', ',');
 
-        const title = doc
-          .querySelector(scrapers[scraper].title)
-          .innerText.trim();
-
-        const girls = [...doc.querySelectorAll(scrapers[scraper].girls)]
-          .map((el) =>
-            scraper === 'Blacked'
-              ? el.innerText
-                  .trim()
-                  .toLowerCase()
-                  .split(' ')
-                  .map((word) => word[0].toUpperCase() + word.slice(1))
-                  .join(' ')
-              : el.innerText.trim()
-          )
-          .join(', ')
-          .replace(',,', ',');
-
-        window.open(
-          `https://www.google.com/search?q=${site} - ${girls} - ${title}`
-        );
-      });
+      window.open(
+        `https://www.google.com/search?q=${site} - ${girls} - ${title}`
+      );
     });
-
-    clearInterval(int);
   }
-}, 100);
+};
+
+if (scraper === 'Brazzers') {
+  let previousUrl = '';
+
+  const observer = new MutationObserver((_mutations, _observer) => {
+    if (window.location.href !== previousUrl) {
+      previousUrl = window.location.href;
+
+      const int = setInterval(() => {
+        const list = [...document.querySelectorAll(scrapers[scraper].link)];
+        if (list.length > 0) {
+          handler(list);
+          clearInterval(int);
+        }
+      }, 100);
+    }
+  });
+
+  observer.observe(document.querySelector('#root'), {
+    childList: true,
+    subtree: true,
+  });
+} else handler([...document.querySelectorAll(scrapers[scraper].link)]);
