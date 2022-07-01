@@ -1,33 +1,52 @@
 // ==UserScript==
 // @name    Download TikTok Video
-// @version 4
+// @version 5
 // @match   https://www.tiktok.com/*
-// @grant   GM_download
+// @grant   GM_xmlhttpRequest
 // ==/UserScript==
 
-document.addEventListener("keydown", (e) => {
-  if (e.key === "/") {
-    if (location.pathname.includes("/video/")) {
-      const slut = location.pathname.split("/")[1];
-      const id = location.pathname.split("/")[3];
+document.addEventListener('keydown', (e) => {
+  if (e.key === '/') {
+    if (location.pathname.includes('/video/')) {
+      const slut = location.pathname.split('/')[1];
+      const id = location.pathname.split('/')[3];
       const trend = document
         .querySelector('a[href^="/music/"]:not([data-e2e="nav-discover-href"])')
-        .innerText.replace(/ \(.*\)/, "")
-        .replace(/ \[.*\]/, "");
-      const videoUrl = document.querySelector('div[data-e2e="browse-video"]')
+        .innerText.replace(/ \(.*\)/, '')
+        .replace(/ \[.*\]/, '');
+      const url = document.querySelector('div[data-e2e="browse-video"]')
         .children[0].src;
 
-      GM_download(videoUrl, `${slut} | ${id} (${trend}).mp4`);
+      GM_xmlhttpRequest({
+        url,
+        responseType: 'blob',
+        onload: (data) => {
+          const link = document.createElement('a');
+          link.href = URL.createObjectURL(data.response);
+          link.download = `${slut} | ${id} (${trend}).mp4`;
+
+          link.click();
+        },
+      });
     } else {
-      const intervalId = setInterval(() => {
-        if (
-          Math.round(window.innerHeight + window.scrollY) >=
-          document.body.offsetHeight
-        ) {
-          clearInterval(intervalId);
-          sortVideos();
-        } else window.scrollTo(0, document.body.scrollHeight);
-      }, 1000);
+      let count = 0;
+      let stalled = 0;
+
+      const int = setInterval(() => {
+        const newCount = document.querySelector(
+          'div[data-e2e="user-post-item-list"]'
+        ).children.length;
+
+        if (newCount > count) {
+          count = newCount;
+          window.scrollTo(0, document.body.scrollHeight);
+        } else {
+          if (stalled >= 10) {
+            clearInterval(int);
+            sortVideos();
+          } else stalled++;
+        }
+      }, 250);
     }
   }
 });
@@ -36,17 +55,17 @@ const sortVideos = () => {
   const sorted = [
     ...document.querySelector('div[data-e2e="user-post-item-list"]').children,
   ].sort((a, b) => {
-    const countStrA = a.querySelector("strong").innerText;
-    const countStrB = b.querySelector("strong").innerText;
+    const countStrA = a.querySelector('strong').innerText;
+    const countStrB = b.querySelector('strong').innerText;
 
-    const countA = countStrA.endsWith("K")
+    const countA = countStrA.endsWith('K')
       ? parseFloat(countStrA) * 1000
-      : countStrA.endsWith("M")
+      : countStrA.endsWith('M')
       ? parseFloat(countStrA) * 1000000
       : parseInt(countStrA);
-    const countB = countStrB.endsWith("K")
+    const countB = countStrB.endsWith('K')
       ? parseFloat(countStrB) * 1000
-      : countStrB.endsWith("M")
+      : countStrB.endsWith('M')
       ? parseFloat(countStrB) * 1000000
       : parseInt(countStrB);
 
@@ -60,12 +79,12 @@ const sortVideos = () => {
     .replaceChildren(...sorted);
 };
 
-window.addEventListener("dragover", (e) => {
+window.addEventListener('dragover', (e) => {
   e.stopPropagation();
   e.preventDefault();
 });
 
-window.addEventListener("drop", (e) => {
+window.addEventListener('drop', (e) => {
   e.stopPropagation();
   e.preventDefault();
 
@@ -78,6 +97,6 @@ window.addEventListener("drop", (e) => {
   ids.forEach((id) => {
     const el = anchors.find((anchor) => anchor.href.includes(id));
 
-    if (el) el.querySelector("img").style.opacity = 0.3;
+    if (el) el.querySelector('img').style.opacity = 0.3;
   });
 });
