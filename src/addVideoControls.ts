@@ -1,20 +1,11 @@
 // ==UserScript==
-// @name    Add Chapters to Scene
-// @version 12
+// @name    Add Video Controls
 // @match   https://*/*.mp4*
+// @match   https://*.cambro.tv/remote_control.php?file=*
 // @match   https://*.fpo.xxx/remote_control.php?file=*
 // ==/UserScript==
 
 window.history.replaceState('', '', '/' + location.hash);
-
-const div = document.createElement('div');
-div.style.display = 'flex';
-div.style.overflowX = 'auto';
-
-document.body.appendChild(div);
-
-let done = false;
-let index = 0;
 
 document.addEventListener('keydown', (e) => {
   let times = decodeURIComponent(location.hash.substring(1))
@@ -23,7 +14,7 @@ document.addEventListener('keydown', (e) => {
     .filter((time) => !!time)
     .map((time) => parseFloat(time));
 
-  const video = document.querySelector('video');
+  const video = document.querySelector('video')!;
   const currTime = video.currentTime;
 
   switch (e.key) {
@@ -78,13 +69,22 @@ document.addEventListener('keydown', (e) => {
       break;
 
     case '=':
+      const div = document.createElement('div');
+      div.style.display = 'flex';
+      div.style.overflowX = 'auto';
+
+      document.body.appendChild(div);
+
+      let done = false;
+      let index = 0;
+
       video.addEventListener('seeked', () => {
         if (!done) {
           const canvas = document.createElement('canvas');
           canvas.height = 144;
           canvas.width = 256;
 
-          const ctx = canvas.getContext('2d');
+          const ctx = canvas.getContext('2d')!;
           ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
           const img = new Image();
