@@ -1,45 +1,38 @@
 // ==UserScript==
 // @name    Download Mobage Cards
 // @match   https://sp.mbga.tv/hsdd/list*
-// @grant   GM_xmlhttpRequest
+// @grant   GM.xmlHttpRequest
+// @run-at  document-start
 // ==/UserScript==
 
-import { get, pause } from "./util";
+import { request } from './util';
 
-document.addEventListener("keydown", async (e) => {
-  if (e.key === "/") {
-    const links: HTMLAnchorElement[] = [];
+document.ontouchstart = () => {};
+
+document.addEventListener('keydown', async (e) => {
+  if (e.metaKey && e.key === 's') {
+    e.preventDefault();
 
     for (const card of [
-      ...document.querySelectorAll('a[href^="/hsdd/card/"]'),
-    ]) {
-      const title = (card as any).innerText.split("(")[0];
+      ...document.querySelectorAll<HTMLAnchorElement>('a[href^="/hsdd/card/"]'),
+    ].reverse()) {
+      const title = card.innerText.split('(')[0];
 
-      if (!title.includes("EX")) {
-        for (const [i, img] of [...card.querySelectorAll("img")].entries()) {
-          const data = await get({
-            url: img.src.replace("/r/", "/l/"),
-            responseType: "blob",
-            headers: {
-              referer: "https://sp.mbga.tv/",
-            },
+      if (!title.includes('EX')) {
+        for (const [i, img] of [...card.querySelectorAll('img')].entries()) {
+          const data = await request({
+            url: img.src.replace('/r/', '/l/'),
+            responseType: 'blob',
+            headers: { referer: 'https://sp.mbga.tv/' },
           });
 
-          const link = document.createElement("a");
-          link.href = URL.createObjectURL(data.response as Blob);
-          link.download = `${title} - ${i + 1}.jpeg`;
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(new Blob([data.response as Blob]));
+          a.download = `${title} - ${i + 1}.jpeg`;
 
-          links.push(link);
+          a.click();
         }
       }
-    }
-
-    while (links.length > 0) {
-      for (const link of links.splice(0, 10)) {
-        link.click();
-      }
-
-      await pause();
     }
   }
 });
